@@ -1,0 +1,69 @@
+<div class="card animated fadeIn cardFormFriend">
+  <div class="card-header bg-danger text-white">GAIN NEW FRIEND</div>
+  <div class="card-body">
+    <form
+      #newFriend="ngForm"
+      [formGroup]="service.formulario"
+      class="normal-form"
+    >
+      <div class="row">
+        <div class="col-md-4 col-sm-4 col-xs-4">
+          <mat-form-field>
+            <input
+              type="hidden"
+              name="id"
+              [(ngModel)]="friend.id"
+              formControlName="id"
+            />
+            <!--NAME-->
+            <input
+              type="text"
+              class="full-width"
+              ngModel
+              [(ngModel)]="friend.name"
+              formControlName="name"
+              matInput
+              placeholder="Nombre Completo*"
+            />
+            <mat-error>Este campo es obligatorio</mat-error>
+          </mat-form-field>
+        </div>
+        <div class="col-md-4 col-sm-4 col-xs-4">
+          <!--GENDER-->
+
+          <mat-form-field appearance="fill">
+            <mat-label>Select an option</mat-label>
+            <mat-select
+              disableRipple
+              type="text"
+              #username
+              [(ngModel)]="friend.gender"
+              formControlName="gender"
+              matInput
+            >
+              <mat-option value="male">MALE</mat-option>
+              <mat-option value="female">FEMALE</mat-option>
+              <mat-option value="other">OTHER</mat-option>
+            </mat-select>
+            <mat-error>Invalid Gender</mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row my-2">
+        <div class="col-md-4 offset-md-8">
+          <!---CREATE BUTTON -->
+          <button
+            class="mx-2"
+            mat-raised-button
+            color="primary"
+            type="submit"
+            (click)="onSubmit(newFriend)"
+            [disabled]="service.formulario.invalid"
+          >
+            Send
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,45 @@
+<div class="card">
+  <div class="card-header bg-danger text-white">
+    <button
+      class="btn-dialog-close"
+      mat-stroked-button
+      tabIndex="-1"
+      (click)="closeDialog()"
+    >
+      <mat-icon>clear</mat-icon>
+    </button>
+    <span class="fill-remaining-space"></span>
+    <!--<span class="ml-2">{{
+          service.formulario.controls["$key"].value
+            ? "Editar Formulario de Registro Servicio"
+            : "Formulario Registro de Servicio"
+        }}</span>-->
+  </div>
+  <div class="card-body">
+    <span class="content-span full-width">
+      {{ data.message }}
+    </span>
+  </div>
+  <div class="card-footer">
+    <!--<div class="row"></div>
+      <div class="col-md-6"></div>
+      <div class="col-md-6"></div>-->
+
+    <button
+      class="mx-2 pull-right"
+      mat-flat-button
+      id="no-button"
+      [mat-dialog-close]="false"
+    >
+      NO
+    </button>
+    <button
+      class="mx-2 pull-right"
+      mat-flat-button
+      id="yes-button"
+      [mat-dialog-close]="true"
+    >
+      YES
+    </button>
+  </div>
+</div>

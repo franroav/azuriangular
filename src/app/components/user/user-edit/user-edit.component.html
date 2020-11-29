@@ -1,0 +1,105 @@
+<div class="card animated bounceInRight cardEditUser">
+  <div class="card-header bg-warning text-white">
+    EDIT USER: {{ fullname }}
+    <span class="badge badge-secondary badge-pill edit-icon"
+      ><i class="fa fa-user mr-1"></i>: {{ " " + id }}</span
+    >
+  </div>
+  <div class="card-body">
+    <form
+      #editUser="ngForm"
+      [formGroup]="service.formulario"
+      class="normal-form"
+    >
+      <div class="row">
+        <div class="col-md-4 col-sm-4 col-xs-4">
+          <mat-form-field>
+            <!--HIIDDEN INPUT -->
+            <input
+              type="hidden"
+              name="id"
+              [(ngModel)]="user.id"
+              formControlName="id"
+            />
+            <!---FULLNAME-->
+            <input
+              type="text"
+              class="full-width"
+              ngModel
+              [(ngModel)]="user.fullname"
+              formControlName="fullname"
+              matInput
+              placeholder="Nombre Completo*"
+            />
+            <mat-error>Este campo es obligatorio</mat-error>
+          </mat-form-field>
+        </div>
+        <div class="col-md-4 col-sm-4 col-xs-4">
+          <!--USERNAME-->
+          <mat-form-field>
+            <input
+              type="text"
+              #username
+              [(ngModel)]="user.username"
+              formControlName="username"
+              matInput
+              placeholder="Username*"
+            />
+            <mat-error>Invalid Username</mat-error>
+          </mat-form-field>
+        </div>
+        <div class="col-md-2 col-sm-2 col-xs-2">
+          <!--AGE-->
+          <mat-form-field>
+            <input
+              type="number"
+              #age
+              [(ngModel)]="user.age"
+              formControlName="age"
+              matInput
+              placeholder="Age*"
+            />
+            <mat-error>Invalid Age</mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row my-2">
+        <div class="col-md-4 offset-md-8">
+          <!--UPDATE-->
+          <button
+            *ngIf="edit; else save"
+            mat-raised-button
+            color="secondary"
+            type="button"
+            [disabled]="service.formulario.invalid"
+            (click)="updateUser(editUser)"
+          >
+            actualizar
+          </button>
+          <!---CREATE-->
+          <ng-template #save>
+            <button
+              class="mx-2"
+              mat-raised-button
+              color="primary"
+              type="submit"
+              (click)="onSubmit(editUser)"
+              [disabled]="service.formulario.invalid"
+            >
+              Enviar
+            </button>
+          </ng-template>
+
+          <button
+            class="mx-2"
+            mat-raised-button
+            color="warn"
+            (click)="onClear()"
+          >
+            Limpiar
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

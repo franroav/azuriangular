@@ -1,0 +1,81 @@
+<div class="card animated bounceInRight cardEditFriend">
+  <div class="card-header bg-warning text-white">
+    EDIT FRIEND: {{ name }}
+    <span class="badge badge-secondary badge-pill edit-icon"
+      ><i class="fa fa-user mr-1"></i>: {{ " " + id }}</span
+    >
+  </div>
+  <div class="card-body">
+    <form
+      #editUser="ngForm"
+      [formGroup]="service.formulario"
+      class="normal-form"
+    >
+      <div class="row">
+        <div class="col-md-4 col-sm-4 col-xs-4">
+          <!--NAME-->
+          <mat-form-field>
+            <input
+              type="hidden"
+              name="id"
+              [(ngModel)]="friend.id"
+              formControlName="id"
+            />
+            <input
+              type="text"
+              class="full-width"
+              ngModel
+              [(ngModel)]="friend.name"
+              formControlName="name"
+              matInput
+              placeholder="Nombre Completo*"
+            />
+            <mat-error>Este campo es obligatorio</mat-error>
+          </mat-form-field>
+        </div>
+        <div class="col-md-4 col-sm-4 col-xs-4">
+          <!--GENDER-->
+          <mat-form-field appearance="fill">
+            <mat-label>Select an option</mat-label>
+            <mat-select
+              disableRipple
+              type="text"
+              #username
+              [(ngModel)]="friend.gender"
+              formControlName="gender"
+              matInput
+            >
+              <mat-option value="male">MALE</mat-option>
+              <mat-option value="female">FEMALE</mat-option>
+              <mat-option value="other">OTHER</mat-option>
+            </mat-select>
+            <mat-error>Invalid Gender</mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row my-2">
+        <div class="col-md-4 offset-md-8">
+          <!--UPDATE-->
+          <button
+            mat-raised-button
+            color="secondary"
+            type="button"
+            [disabled]="service.formulario.invalid"
+            (click)="updateFriend(editUser)"
+          >
+            actualizar
+          </button>
+
+          <button
+            class="mx-2"
+            mat-raised-button
+            color="warn"
+            (click)="onClear()"
+          >
+            Limpiar
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

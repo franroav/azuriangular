@@ -1,0 +1,115 @@
+<div class="container">
+  <div class="row">
+    <ng-container *ngIf="edit">
+      <app-user-edit
+        [fullname]="fullname"
+        [username]="username"
+        [age]="age"
+        [edit]="edit"
+        [id]="id"
+        (cambio)="onSaveForm($event)"
+        class="col-md-10 offset-md-1 my-2"
+      ></app-user-edit>
+    </ng-container>
+    <ng-container *ngIf="save">
+      <app-user-add class="col-md-10 offset-md-1 my-2"></app-user-add>
+    </ng-container>
+  </div>
+  <div class="row">
+    <mat-form-field
+      class="search-form-field"
+      floatLabel="never"
+      class="col-md-10 offset-md-1 my-2"
+    >
+      <!-- SEARCH -->
+      <input
+        matInput
+        [(ngModel)]="searchKey"
+        placeholder="Buscar..."
+        autocomplete="off"
+        (keyup)="applyFilter()"
+      />
+      <button
+        mat-button
+        matSuffix
+        mat-icon-button
+        aria-label="Clear"
+        *ngIf="searchKey"
+        (click)="onSearchClear()"
+      >
+        <mat-icon>close</mat-icon>
+      </button>
+    </mat-form-field>
+  </div>
+  <div class="row">
+    <div
+      class="example-container mat-elevation-z8 animated fadeInUp usertable col-md-10 offset-md-1"
+    >
+      <mat-table [dataSource]="listData" #table matSort>
+        <ng-container matColumnDef="Fullname">
+          <mat-header-cell *matHeaderCellDef mat-sort-header>
+            Fullname
+          </mat-header-cell>
+          <mat-cell *matCellDef="let element">{{ element.fullname }}</mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="Username">
+          <mat-header-cell *matHeaderCellDef mat-sort-header
+            >Username</mat-header-cell
+          >
+          <mat-cell *matCellDef="let element">{{ element.username }}</mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="Age">
+          <mat-header-cell *matHeaderCellDef mat-sort-header
+            >Age</mat-header-cell
+          >
+          <mat-cell *matCellDef="let element">{{ element.age }}</mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="actions">
+          <mat-header-cell *matHeaderCellDef></mat-header-cell>
+          <mat-cell *matCellDef="let row">
+            <button mat-icon-button color="primary" (click)="onEditForm(row)">
+              <mat-icon>edit</mat-icon>
+            </button>
+            <button mat-icon-button color="warn" (click)="onDelete(row)">
+              <mat-icon>delete_outline</mat-icon>
+            </button>
+            <button
+              mat-icon-button
+              color="accent"
+              [routerLink]="['/users/' + row.id]"
+            >
+              <mat-icon>launch</mat-icon>
+            </button>
+          </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="loading">
+          <mat-footer-cell *matFooterCellDef colspan="6">
+            Loading data...
+          </mat-footer-cell>
+        </ng-container>
+        <ng-container matColumnDef="noData">
+          <mat-footer-cell *matFooterCellDef colspan="6">
+            No data.
+          </mat-footer-cell>
+        </ng-container>
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+        <ng-container *ngIf="false">
+          <mat-footer-row
+            *matFooterRowDef="['loading']"
+            [ngClass]="{ hide: noData }"
+          ></mat-footer-row>
+          <mat-footer-row
+            *matFooterRowDef="['noData']"
+            [ngClass]="{ hide: noData }"
+          ></mat-footer-row>
+        </ng-container>
+      </mat-table>
+      <mat-paginator
+        [pageSizeOptions]="[5, 1, 25, 100]"
+        [pageSize]="5"
+        showFirstLastButtons
+      ></mat-paginator>
+    </div>
+  </div>
+</div>
